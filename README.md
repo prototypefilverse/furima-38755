@@ -5,7 +5,7 @@
 | Column             | Type   | Options                               |
 | ------------------ | ------ | ------------------------------------- |
 | nickname           | string | null: false                           |
-| email              | string | null: false                           |
+| email              | string | null: false, unique: true             |
 | encrypted_password | string | null: false, 半角英数字混合必須          | 
 | first_name         | string | null: false, 全角入力必須               |
 | family_name        | string | null: false, 全角入力必須               |
@@ -27,13 +27,13 @@
 | user             | references | null: false, foreign_key: true |
 | image            |            | (Active Storage)               |
 | name             | string     | null: false                    |
-| description      | string     | null: false                    |
+| description      | text       | null: false                    |
 | category_id      | integer    | null: false                    |
 | status_id        | integer    | null: false                    |
 | shipping_cost_id | integer    | null: false                    |
 | prefecture_id    | integer    | null: false                    |
-| shipping_days_id | integer    | null: false                    |
-| price            | string     | null: false, ¥300~¥9,999,999の間のみ保存可能      
+| shipping_day_id  | integer    | null: false                    |
+| price            | integer    | null: false, ¥300~¥9,999,999の間のみ保存可能      
 |                  |            |              半角数値のみ保存可能
 
 ### Association
@@ -54,6 +54,7 @@
 
 - belongs_to :user
 - belongs_to :item
+- has_one :payment
 
 
 ## payments テーブル
