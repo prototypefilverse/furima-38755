@@ -2,42 +2,73 @@
 
 ## users テーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| email              | string | null: false, ユニーク制約 |
-| encrypted_password | string | null: false |
-| name               | string | null: false |
-| profile            | text   | null: false |
-| occupation         | text   | null: false |
-| potition           | text   | null: false |
+| Column             | Type   | Options                               |
+| ------------------ | ------ | ------------------------------------- |
+| nickname           | string | null: false                           |
+| email              | string | null: false                           |
+| encrypted_password | string | null: false, 半角英数字混合必須          | 
+| first_name         | string | null: false, 全角入力必須               |
+| family_name        | string | null: false, 全角入力必須               |
+| first_name_kana    | string | null: false, 全角（カタカナ）での入力必須  |
+| family_name_kana   | string | null: false, 全角（カタカナ）での入力必須  |
+| birth_day          | date   | null: false                           |
+
 
 ### Association
 
-- has_many :prototypes
-- has_many :comments
+- has_many :items 
+- has_many :orders
 
 
-## prototypes テーブル
+## items テーブル
 
-| Column     | Type       | Options                        |
-| ---------  | ---------  | -----------------------------  |   
-| title      | string     | null: false                    |
-| catch_copy | text       | null: false                    |
-| concept    | text       | null: false                    |
-| user       | references | null: false, foreign_key: true |
+| Column           | Type       | Options                        |
+| -----------------| ---------- | -----------------------------  |   
+| user             | references | null: false, foreign_key: true |
+| image            |            | (Active Storage)               |
+| name             | string     | null: false                    |
+| description      | string     | null: false                    |
+| category_id      | integer    | null: false                    |
+| status_id        | integer    | null: false                    |
+| shipping_cost_id | integer    | null: false                    |
+| prefecture_id    | integer    | null: false                    |
+| shipping_days_id | integer    | null: false                    |
+| price            | string     | null: false, ¥300~¥9,999,999の間のみ保存可能      
+|                  |            |              半角数値のみ保存可能
 
 ### Association
 
 - belongs_to :user
-- has_many :comments
+- has_one :order
+- has_one_attached :image
 
-
-## comments テーブル
+## orders テーブル
 
 | Column    | Type       | Options                        |
 | --------  | ---------- | ------------------------------ |
-| content   | text       | null: false                    |
-| prototype | references | null: false, foreign_key: true |
+| item      | references | null: false, foreign_key: true |
 | user      | references | null: false, foreign_key: true |
 
+
 ### Association
+
+- belongs_to :user
+- belongs_to :item
+
+
+## payments テーブル
+
+| Column        | Type       | Options                        |
+| --------      | ---------- | ------------------------------ |
+| order         | references | null: false, foreign_key: true |
+| postcode      | string     | null: false, 「3桁ハイフン4桁」の半角文字列のみ保存可能   |
+| prefecture_id | integer    | null: false                    |
+| city          | string     | null: false                    |
+| block         | string     | null: false                    |
+| building      | string     |                                |
+| phone_number  | string     | null: false, 10桁以上11桁以内の半角数値のみ保存可能(ハイフン不可)  |
+
+
+### Association
+
+belongs_to :order
