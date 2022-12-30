@@ -2,16 +2,16 @@
 
 ## users テーブル
 
-| Column             | Type   | Options                               |
-| ------------------ | ------ | ------------------------------------- |
-| nickname           | string | null: false                           |
-| email              | string | null: false, unique: true             |
-| encrypted_password | string | null: false, 半角英数字混合必須          | 
-| first_name         | string | null: false, 全角入力必須               |
-| family_name        | string | null: false, 全角入力必須               |
-| first_name_kana    | string | null: false, 全角（カタカナ）での入力必須  |
-| family_name_kana   | string | null: false, 全角（カタカナ）での入力必須  |
-| birth_day          | date   | null: false                           |
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| nickname           | string | null: false               |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               | 
+| first_name         | string | null: false               |
+| family_name        | string | null: false               |
+| first_name_kana    | string | null: false               |
+| family_name_kana   | string | null: false               |
+| birth_day          | date   | null: false               |
 
 
 ### Association
@@ -25,7 +25,6 @@
 | Column           | Type       | Options                        |
 | -----------------| ---------- | -----------------------------  |   
 | user             | references | null: false, foreign_key: true |
-| image            |            | (Active Storage)               |
 | name             | string     | null: false                    |
 | description      | text       | null: false                    |
 | category_id      | integer    | null: false                    |
@@ -33,8 +32,8 @@
 | shipping_cost_id | integer    | null: false                    |
 | prefecture_id    | integer    | null: false                    |
 | shipping_day_id  | integer    | null: false                    |
-| price            | integer    | null: false, ¥300~¥9,999,999の間のみ保存可能      
-|                  |            |              半角数値のみ保存可能
+| price            | integer    | null: false                    |
+
 
 ### Association
 
@@ -62,12 +61,12 @@
 | Column        | Type       | Options                        |
 | --------      | ---------- | ------------------------------ |
 | order         | references | null: false, foreign_key: true |
-| postcode      | string     | null: false, 「3桁ハイフン4桁」の半角文字列のみ保存可能   |
+| postcode      | string     | null: false                    |
 | prefecture_id | integer    | null: false                    |
 | city          | string     | null: false                    |
 | block         | string     | null: false                    |
 | building      | string     |                                |
-| phone_number  | string     | null: false, 10桁以上11桁以内の半角数値のみ保存可能(ハイフン不可)  |
+| phone_number  | string     | null: false                    |
 
 
 ### Association
