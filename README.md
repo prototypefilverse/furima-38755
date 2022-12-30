@@ -2,42 +2,73 @@
 
 ## users テーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| email              | string | null: false, ユニーク制約 |
-| encrypted_password | string | null: false |
-| name               | string | null: false |
-| profile            | text   | null: false |
-| occupation         | text   | null: false |
-| potition           | text   | null: false |
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| nickname           | string | null: false               |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               | 
+| first_name         | string | null: false               |
+| family_name        | string | null: false               |
+| first_name_kana    | string | null: false               |
+| family_name_kana   | string | null: false               |
+| birth_day          | date   | null: false               |
+
 
 ### Association
 
-- has_many :prototypes
-- has_many :comments
+- has_many :items 
+- has_many :orders
 
 
-## prototypes テーブル
+## items テーブル
 
-| Column     | Type       | Options                        |
-| ---------  | ---------  | -----------------------------  |   
-| title      | string     | null: false                    |
-| catch_copy | text       | null: false                    |
-| concept    | text       | null: false                    |
-| user       | references | null: false, foreign_key: true |
+| Column           | Type       | Options                        |
+| -----------------| ---------- | -----------------------------  |   
+| user             | references | null: false, foreign_key: true |
+| name             | string     | null: false                    |
+| description      | text       | null: false                    |
+| category_id      | integer    | null: false                    |
+| status_id        | integer    | null: false                    |
+| shipping_cost_id | integer    | null: false                    |
+| prefecture_id    | integer    | null: false                    |
+| shipping_day_id  | integer    | null: false                    |
+| price            | integer    | null: false                    |
+
 
 ### Association
 
 - belongs_to :user
-- has_many :comments
+- has_one :order
+- has_one_attached :image
 
-
-## comments テーブル
+## orders テーブル
 
 | Column    | Type       | Options                        |
 | --------  | ---------- | ------------------------------ |
-| content   | text       | null: false                    |
-| prototype | references | null: false, foreign_key: true |
+| item      | references | null: false, foreign_key: true |
 | user      | references | null: false, foreign_key: true |
 
+
 ### Association
+
+- belongs_to :user
+- belongs_to :item
+- has_one :payment
+
+
+## payments テーブル
+
+| Column        | Type       | Options                        |
+| --------      | ---------- | ------------------------------ |
+| order         | references | null: false, foreign_key: true |
+| postcode      | string     | null: false                    |
+| prefecture_id | integer    | null: false                    |
+| city          | string     | null: false                    |
+| block         | string     | null: false                    |
+| building      | string     |                                |
+| phone_number  | string     | null: false                    |
+
+
+### Association
+
+belongs_to :order
