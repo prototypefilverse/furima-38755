@@ -8,8 +8,8 @@ class User < ApplicationRecord
   validates :password, format: { with: VALID_PASSWORD_REGEX, message: 'Include both letters and numbers' }
 
   validates :nickname,         presence: true
-  validates :first_name,       presence: true, format: { with: /\A[ぁ-んァ-ン一-龥]/ }
-  validates :family_name,      presence: true, format: { with: /\A[ぁ-んァ-ン一-龥]/ }
+  validates :first_name,       presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: '全角文字を使用してください' }
+  validates :family_name,      presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: '全角文字を使用してください' }
   validates :first_name_kana,  presence: true, format: { with: /\A[ァ-ヶー－]+\z/ }
   validates :family_name_kana, presence: true, format: { with: /\A[ァ-ヶー－]+\z/ }
   validates :birth_day,        presence: true
