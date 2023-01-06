@@ -1,6 +1,14 @@
 class Item < ApplicationRecord
+  extend ActiveHash::Associations::ActiveRecordExtensions
 
-  validates :user_id,          presence: true
+  belongs_to :category
+
+  belongs_to :user
+  has_one    :order
+
+  has_one_attached :image
+
+  
   validates :name,             presence: true
   validates :description,      presence: true
   validates :category_id,      presence: true
@@ -11,9 +19,5 @@ class Item < ApplicationRecord
   validates :price,            presence: true
   validates :image,            presence: true
 
-  belongs_to :user
-  has_one    :order
-
-  has_one_attached :image
 
 end
