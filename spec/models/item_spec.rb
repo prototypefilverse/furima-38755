@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Item, type: :model do
   before do
     @item = FactoryBot.create(:item)
+    sleep(0.1)
   end
 
   describe '商品の出品' do
@@ -16,6 +17,12 @@ RSpec.describe Item, type: :model do
     end
 
     context '出品できないとき' do
+
+      it '商品画像を1枚つけないと出品できない' do
+        @item.image = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Image can't be blank")
+      end
  
       it '商品名が空では出品できない' do
         @item.name = " "
@@ -27,6 +34,12 @@ RSpec.describe Item, type: :model do
         @item.description = " "
         @item.valid?
         expect(@item.errors.full_messages).to include("Description can't be blank")
+      end
+
+      it 'カテゴリーの情報が空だと出品できない' do
+        @item.category_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category can't be blank")
       end
 
 
