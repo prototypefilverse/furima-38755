@@ -21,8 +21,7 @@ class Item < ApplicationRecord
   validates :prefecture_id,    presence: true, numericality: { other_than: 0 , message: "can't be blank" } 
   validates :shipping_day_id,  presence: true, numericality: { other_than: 0 , message: "can't be blank" } 
   validates :price,            presence: true, 
-                           numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: "out of range" },                         
-                                 format: { with: /\A[0-9]+\z/ }
+                           numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: "out of range" }                                   
   validates :image,            presence: true
 
 
