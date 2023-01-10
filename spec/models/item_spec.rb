@@ -14,11 +14,10 @@ RSpec.describe Item, type: :model do
     end
 
     context '出品できないとき' do
-
-      it "userが紐づいていないと出品できない" do
+      it 'userが紐づいていないと出品できない' do
         @item.user = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("User must exist")
+        expect(@item.errors.full_messages).to include('User must exist')
       end
 
       it '商品画像を1枚つけないと出品できない' do
@@ -116,13 +115,12 @@ RSpec.describe Item, type: :model do
         expect(@item).to_not be_valid
         expect(@item.errors.full_messages).to include('Price out of range')
       end
-      
+
       it '価格に半角数字以外が含まれている場合は出品できない' do
-        @item.price = "100a"
+        @item.price = '100a'
         @item.valid?
         expect(@item.errors.full_messages).to include('Price out of range')
       end
-
     end
   end
 end
