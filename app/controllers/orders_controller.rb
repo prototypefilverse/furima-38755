@@ -4,6 +4,9 @@ class OrdersController < ApplicationController
   def index
     @order_payment = OrderPayment.new
     @item = Item.find(params[:item_id])
+    if current_user == @item.user
+     redirect_to root_path
+    end
   end
 
   def create
