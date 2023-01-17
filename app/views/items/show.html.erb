@@ -24,7 +24,7 @@
     </div>
 
     <%#ユーザーがログインしている%>
-      <% if user_signed_in? %>
+    <% if user_signed_in? %>
       
       <%#自身が出品した販売中商品の場合%>
       <% if current_user.id == @item.user_id && @item.order.nil? %>
@@ -32,8 +32,8 @@
       <p class="or-text">or</p>
       <%= link_to "削除", item_path(@item.id) , method: :delete, class:"item-destroy" %>
       <%#自身が出品していない販売中商品の場合%>
-      <%# elsif current_user.id != @item.user_id && @item.order.nil?%>
-      <%#= link_to "購入画面に進む", item_orders_path(@item), class:"item-red-btn"%>
+      <% elsif current_user.id != @item.user_id && @item.order.nil? %>
+      <%= link_to "購入画面に進む", item_orders_path(@item), class:"item-red-btn"%>
       <% end %>
 
     <% end %>
