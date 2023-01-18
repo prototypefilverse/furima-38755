@@ -87,6 +87,12 @@ RSpec.describe OrderPayment, type: :model do
         expect(@order_payment.errors.full_messages).to include('Phone number not correct')
       end
 
+      it '電話番号に半角数字以外が含まれている場合は購入できない' do
+        @order_payment.phone_number = '111-1111-1111'
+        @order_payment.valid?
+        expect(@order_payment.errors.full_messages).to include('Phone number not correct')
+      end
+
       it 'トークンが空だと購入できない' do
         @order_payment.token = ' '
         @order_payment.valid?
