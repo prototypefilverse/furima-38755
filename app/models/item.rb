@@ -15,12 +15,12 @@ class Item < ApplicationRecord
   with_options presence: true do
    validates :name
    validates :description
-   validates :category_id,      numericality: { other_than: 0, message: "can't be blank" }
-   validates :status_id,        numericality: { other_than: 0, message: "can't be blank" }
-   validates :shipping_cost_id, numericality: { other_than: 0, message: "can't be blank" }
-   validates :prefecture_id,    numericality: { other_than: 0, message: "can't be blank" }
-   validates :shipping_day_id,  numericality: { other_than: 0, message: "can't be blank" }
-   validates :price,            numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'out of range' }
+   validates :category_id,      numericality: { other_than: 0, message: "を選択してください" }
+   validates :status_id,        numericality: { other_than: 0, message: "を選択してください" }
+   validates :shipping_cost_id, numericality: { other_than: 0, message: "を選択してください" }
+   validates :prefecture_id,    numericality: { other_than: 0, message: "を選択してください" }
+   validates :shipping_day_id,  numericality: { other_than: 0, message: "を選択してください" }
+   validates :price,            numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'の値が不正です' }
    validates :image
   end
 
